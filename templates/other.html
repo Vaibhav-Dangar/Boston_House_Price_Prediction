@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<style>
+body {
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  background:black;
+}
+
+
+.box
+{
+    position:relative;
+    width:400px;
+    height:950px;
+    background:black;
+    border-radius:8px;
+    overflow:hidden;
+}
+.box::before
+{
+    content:'';
+    position:absolute;
+    top:-50px;
+    left:-50px;
+    width:380px;
+    height:420px;
+    background:linear-gradient(0deg,transparent,transparent,#45f3ff,#45f3ff,#45f3ff);
+    z-index:1;
+    transform-origin:bottom right;
+    animation:animate 6s linear infinite;
+}
+.box::after
+{
+    content:'';
+    position:absolute;
+    top:-50px;
+    left:-50px;
+    width:380px;
+    height:420px;
+    background:linear-gradient(0deg,transparent,transparent,#45f3ff,#45f3ff,#45f3ff);
+    z-index:1;
+    transform-origin:bottom right;
+    animation:animate 6s linear infinite;
+    animation-delay:-3s
+}
+@keyframes animate{
+    0%{
+        transform:rotate(0deg)
+    }
+    100%{
+        transform:rotate(360deg)
+    }
+}
+.box form{
+    position:absolute;
+    inset:4px;
+    background:black;
+    padding:50px 40px;
+    border-radius:8px;
+    z-index:2;
+    display:flex;
+    flex-direction:column
+}
+.box form h2{
+    color:white;
+    font-weight:500;
+    text-align:center;
+    letter-spacing:0.1em
+}
+.box form .inputBox{
+    position:relative;
+    width:300px;
+    margin-top:35px;
+}
+.box form .inputBox input{
+    position:relative;
+    width:100%;
+    padding:20px 10px 10px;
+    background:transparent;
+    outline:none;
+    box-shadow:none;
+    color:black;
+    font-size:1em;
+    letter-spacing:0.05em;
+    transition:0.5s;
+    z-index:10;
+    
+}
+
+
+
+
+
+/* Set a style for the submit button */
+
+</style>
+</head>
+<body>
+
+    <div class="box">
+         <!-- Main Input For Receiving Query to our ML -->
+        <form action="{{ url_for('predict')}}"method="post">
+          <h2>Boston House Price Prediction</h2>
+          <input type="text" name="CRIM" placeholder="CRIM" required="required" /><br>
+            <input type="text" name="ZN" placeholder="ZN" required="required" /><br>
+            <input type="text" name="INDUS" placeholder="INDUS" required="required" /><br>
+            <input type="text" name="CHAS" placeholder="CHAS" required="required" /><br>
+            <input type="text" name="NOX" placeholder="NOX" required="required" /><br>
+            <input type="text" name="RM" placeholder="RM" required="required" /><br>
+            <input type="text" name="Age" placeholder="Age" required="required" /><br>
+            <input type="text" name="DIS" placeholder="DIS" required="required" /><br>
+            <input type="text" name="RAD" placeholder="RAD" required="required" /><br>
+            <input type="text" name="TAX" placeholder="TAX" required="required" /><br>
+            <input type="text" name="PTRATIO" placeholder="PTRATIO" required="required" /><br>
+            <input type="text" name="B" placeholder="B" required="required" /><br>
+            <input type="text" name="LSTAT" placeholder="LSTAT" required="required" /><br>
+    
+    
+            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        </form>
+    
+       <br>
+       <br>
+      
+       
+     </div>
+     <h2 style="color:white;">{{prediction_text}}</h2>
+     
+
+</body>
+</html>
